@@ -31,6 +31,12 @@ export default function Header() {
         {/* Navigation desktop */}
         <nav className="hidden md:flex items-center gap-8">
           <Link
+            href="/"
+            className="text-sm font-medium text-anthracite/70 hover:text-indigo transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-gold after:transition-all hover:after:w-full"
+          >
+            Accueil
+          </Link>
+          <Link
             href="/services"
             className="text-sm font-medium text-anthracite/70 hover:text-indigo transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-gold after:transition-all hover:after:w-full"
           >
@@ -81,6 +87,13 @@ export default function Header() {
       {/* Menu mobile */}
       <div className={`md:hidden fixed inset-x-0 top-20 bg-white/95 backdrop-blur-lg border-b border-champagne/20 shadow-lg transition-all duration-500 ease-in-out ${mobileOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0 pointer-events-none'}`}>
         <div className="px-6 py-8 space-y-6 text-center">
+          <Link
+            href="/"
+            onClick={() => setMobileOpen(false)}
+            className="block text-lg font-medium text-indigo hover:text-gold transition-colors"
+          >
+            Accueil
+          </Link>
           <Link
             href="/services"
             onClick={() => setMobileOpen(false)}
