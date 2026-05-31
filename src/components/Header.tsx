@@ -1,45 +1,15 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { usePathname } from 'next/navigation'
 
 export default function Header() {
-  const [isScrolled, setIsScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
-  const pathname = usePathname()
-  const isHomePage = pathname === '/'
-
-  useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 20)
-    window.addEventListener('scroll', handleScroll)
-    handleScroll()
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
-
-  useEffect(() => {
-    document.body.style.overflow = mobileOpen ? 'hidden' : ''
-    return () => { document.body.style.overflow = '' }
-  }, [mobileOpen])
-
-  // Liens toujours en anthracite, sauf l'actif en or
-  const linkClass = (href: string) =>
-    `text-sm font-medium transition-colors duration-300 ${
-      pathname === href
-        ? 'text-gold'
-        : 'text-anthracite/70 hover:text-indigo'
-    }`
 
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        isHomePage && !isScrolled
-          ? 'bg-transparent'
-          : 'bg-white/90 backdrop-blur-lg border-b border-champagne/20 shadow-sm'
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-6 lg:px-8 h-20 flex items-center justify-between">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-white/85 backdrop-blur-lg border-b border-champagne/20 h-20">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8 h-full flex items-center justify-between">
         
         {/* Logo + Nom */}
         <Link href="/" className="flex items-center gap-3 group">
@@ -58,18 +28,33 @@ export default function Header() {
           </span>
         </Link>
 
-        {/* Desktop Navigation */}
+        {/* Navigation desktop */}
         <nav className="hidden md:flex items-center gap-8">
-          <Link href="/" className={linkClass('/')}>Accueil</Link>
-          <Link href="/services" className={linkClass('/services')}>Services</Link>
-          <Link href="/ressources" className={linkClass('/ressources')}>Ressources</Link>
-          <Link href="/a-propos" className={linkClass('/a-propos')}>À propos</Link>
+          <Link
+            href="/services"
+            className="text-sm font-medium text-anthracite/70 hover:text-indigo transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-gold after:transition-all hover:after:w-full"
+          >
+            Services
+          </Link>
+          <Link
+            href="/ressources"
+            className="text-sm font-medium text-anthracite/70 hover:text-indigo transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-gold after:transition-all hover:after:w-full"
+          >
+            Ressources
+          </Link>
+          <Link
+            href="/a-propos"
+            className="text-sm font-medium text-anthracite/70 hover:text-indigo transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-gold after:transition-all hover:after:w-full"
+          >
+            À propos
+          </Link>
           
-          {/* CTA Button */}
+          {/* Bouton CTA avec animation de pulsation */}
           <Link
             href="/contact"
-            className="group relative inline-flex items-center gap-2 bg-indigo pl-5 pr-4 py-2.5 text-sm font-medium text-white overflow-hidden transition-all duration-300 hover:bg-indigo/90"
+            className="group relative inline-flex items-center gap-2 bg-indigo pl-5 pr-4 py-2.5 text-sm font-medium text-white overflow-hidden transition-all duration-300 hover:bg-indigo/90 animate-pulse-slow"
           >
+            {/* Liseré drapeau Bénin au survol */}
             <span className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-benin-green via-benin-yellow to-benin-red opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             <span className="relative w-1.5 h-1.5 bg-gold rotate-45 group-hover:scale-125 transition-transform duration-300" />
             <span>Se faire accompagner</span>
@@ -79,10 +64,10 @@ export default function Header() {
           </Link>
         </nav>
 
-        {/* Hamburger (mobile) */}
+        {/* Bouton hamburger mobile */}
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
-          className="md:hidden relative w-8 h-8 flex items-center justify-center text-indigo z-50"
+          className="md:hidden relative w-8 h-8 flex items-center justify-center text-indigo"
           aria-label="Menu"
         >
           <div className="flex flex-col gap-1.5">
@@ -93,30 +78,51 @@ export default function Header() {
         </button>
       </div>
 
-      {/* Mobile Menu Fullscreen */}
-      <div
-        className={`md:hidden fixed inset-0 z-40 bg-white/95 backdrop-blur-xl transition-all duration-500 ease-in-out ${
-          mobileOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
-        }`}
-        style={{ top: 0 }}
-      >
-        <div className="flex flex-col items-center justify-center h-full px-6">
-          <nav className="space-y-8 text-center">
-            <Link href="/" onClick={() => setMobileOpen(false)} className="block text-3xl font-serif font-bold text-indigo hover:text-gold transition-colors">Accueil</Link>
-            <Link href="/services" onClick={() => setMobileOpen(false)} className="block text-3xl font-serif font-bold text-indigo hover:text-gold transition-colors">Services</Link>
-            <Link href="/ressources" onClick={() => setMobileOpen(false)} className="block text-3xl font-serif font-bold text-indigo hover:text-gold transition-colors">Ressources</Link>
-            <Link href="/a-propos" onClick={() => setMobileOpen(false)} className="block text-3xl font-serif font-bold text-indigo hover:text-gold transition-colors">À propos</Link>
-            <Link
-              href="/contact"
-              onClick={() => setMobileOpen(false)}
-              className="inline-flex items-center justify-center gap-2 bg-indigo px-8 py-4 text-lg font-medium text-white hover:bg-indigo/90 transition-colors mt-8"
-            >
-              <span className="w-1.5 h-1.5 bg-gold rotate-45" />
-              Se faire accompagner
-            </Link>
-          </nav>
+      {/* Menu mobile */}
+      <div className={`md:hidden fixed inset-x-0 top-20 bg-white/95 backdrop-blur-lg border-b border-champagne/20 shadow-lg transition-all duration-500 ease-in-out ${mobileOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0 pointer-events-none'}`}>
+        <div className="px-6 py-8 space-y-6 text-center">
+          <Link
+            href="/services"
+            onClick={() => setMobileOpen(false)}
+            className="block text-lg font-medium text-indigo hover:text-gold transition-colors"
+          >
+            Services
+          </Link>
+          <Link
+            href="/ressources"
+            onClick={() => setMobileOpen(false)}
+            className="block text-lg font-medium text-indigo hover:text-gold transition-colors"
+          >
+            Ressources
+          </Link>
+          <Link
+            href="/a-propos"
+            onClick={() => setMobileOpen(false)}
+            className="block text-lg font-medium text-indigo hover:text-gold transition-colors"
+          >
+            À propos
+          </Link>
+          <Link
+            href="/contact"
+            onClick={() => setMobileOpen(false)}
+            className="inline-flex items-center justify-center gap-2 bg-indigo px-6 py-3 text-sm font-medium text-white hover:bg-indigo/90 transition-colors"
+          >
+            <span className="w-1.5 h-1.5 bg-gold rotate-45" />
+            Se faire accompagner
+          </Link>
         </div>
       </div>
+
+      {/* Animation de pulsation pour le bouton */}
+      <style jsx>{`
+        @keyframes pulse-slow {
+          0%, 100% { transform: scale(1); }
+          50% { transform: scale(1.02); }
+        }
+        .animate-pulse-slow {
+          animation: pulse-slow 3s ease-in-out infinite;
+        }
+      `}</style>
     </header>
   )
 }

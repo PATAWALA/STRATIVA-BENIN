@@ -132,6 +132,25 @@ export default function ServicesPage() {
             ))}
           </div>
         </div>
+
+        {/* CTA global */}
+        <div className="mt-24 bg-indigo py-12 px-6 sm:px-12 text-center">
+          <h2 className="text-2xl sm:text-3xl font-serif font-bold text-white mb-4">
+            Prêt à structurer votre croissance ?
+          </h2>
+          <p className="text-cream/70 text-sm sm:text-base max-w-xl mx-auto mb-8">
+            Rejoignez les +150 dirigeants et PME que nous accompagnons avec rigueur et confidentialité.
+          </p>
+          <Link
+            href="/contact"
+            className="inline-flex items-center gap-2 bg-white text-indigo px-8 py-4 text-sm font-medium hover:bg-gold hover:text-white transition-colors"
+          >
+            Se faire accompagner
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+            </svg>
+          </Link>
+        </div>
       </div>
     </main>
   )
