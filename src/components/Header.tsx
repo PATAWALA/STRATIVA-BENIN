@@ -80,18 +80,18 @@ export default function Header() {
       {/* Overlay sombre */}
       {mobileOpen && (
         <div
-          className="md:hidden fixed inset-0 z-40 bg-black/40 backdrop-blur-sm"
+          className="md:hidden fixed inset-0 z-40 bg-black/60 backdrop-blur-sm"
           onClick={() => setMobileOpen(false)}
         />
       )}
 
-      {/* Sidebar mobile droite */}
-      <div className={`md:hidden fixed top-0 right-0 bottom-0 z-40 w-72 bg-white/95 backdrop-blur-xl shadow-2xl transition-transform duration-500 ease-in-out flex flex-col ${mobileOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+      {/* Sidebar mobile droite – fond opaque */}
+      <div className={`md:hidden fixed top-0 right-0 bottom-0 z-40 w-72 bg-white shadow-2xl transition-transform duration-500 ease-in-out flex flex-col ${mobileOpen ? 'translate-x-0' : 'translate-x-full'}`}>
         
         {/* Bouton fermeture */}
         <button
           onClick={() => setMobileOpen(false)}
-          className="absolute top-4 right-4 w-10 h-10 flex items-center justify-center rounded-full bg-cream text-indigo hover:bg-champagne/30 transition-colors"
+          className="absolute top-4 right-4 w-10 h-10 flex items-center justify-center rounded-full bg-cream text-indigo hover:bg-champagne transition-colors"
           aria-label="Fermer le menu"
         >
           <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
