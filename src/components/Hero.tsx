@@ -6,15 +6,15 @@ import Image from 'next/image'
 
 const images = [
   {
-    src: 'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    src: '/images/hero1.jpg',
     alt: 'Équipe de dirigeants en réunion stratégique'
   },
   {
-    src: 'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    src: '/images/hero2.jpg',
     alt: 'Dirigeant confiant'
   },
   {
-    src: 'https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    src: '/images/hero3.jpg',
     alt: 'Collaborateurs en stratégie'
   }
 ]
