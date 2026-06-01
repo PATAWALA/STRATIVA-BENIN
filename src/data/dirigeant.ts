@@ -1,5 +1,5 @@
 export const dirigeant = {
-  nom: 'Jean-Marc H.',
+  nom: 'Koffi Akouété',
   poste: 'Associé Fondateur de Strativa Bénin',
   citation:
     '« Chaque entreprise recèle un potentiel inexploité. Notre mission est de le révéler avec rigueur, humilité et détermination. »',
