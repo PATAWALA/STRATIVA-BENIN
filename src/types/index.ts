@@ -5,5 +5,5 @@ export interface LeadInsert {
   nom_entreprise?: string
   taille_entreprise?: '2-10' | '11-50' | '50+'
   type_besoin?: string
-  source: 'contact' | 'popup'
+  source: 'contact' | 'popup' | 'banner'
 }
