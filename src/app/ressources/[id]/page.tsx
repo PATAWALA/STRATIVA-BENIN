@@ -19,7 +19,7 @@ export default async function ArticleDetailPage({ params }: { params: Promise<{ 
         {/* En-tête article */}
         <div className="mb-10">
           <div className="flex items-center gap-3 mb-4">
-            <span className="text-[11px] font-medium uppercase tracking-[0.15em] text-gold bg-gold/[0.06] px-3 py-1.5 rounded-full">
+            <span className="text-[11px] font-medium uppercase tracking-[0.15em] text-gold bg-gold/[0.06] px-3 py-1.5">
               {article.categorie}
             </span>
             <span className="text-[11px] text-anthracite/40">
@@ -29,7 +29,7 @@ export default async function ArticleDetailPage({ params }: { params: Promise<{ 
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-indigo leading-tight mb-4">
             {article.titre}
           </h1>
-          <div className="w-20 h-[3px] bg-gradient-to-r from-benin-green via-benin-yellow to-benin-red mb-6 rounded-full" />
+          <div className="w-20 h-[3px] bg-gradient-to-r from-benin-green via-benin-yellow to-benin-red mb-6" />
           <p className="text-lg text-anthracite/60 font-light leading-relaxed mb-4">{article.resume}</p>
           <p className="text-sm text-anthracite/40">
             {new Date(article.date).toLocaleDateString('fr-FR', {
@@ -41,7 +41,7 @@ export default async function ArticleDetailPage({ params }: { params: Promise<{ 
         </div>
 
         {/* Image de couverture */}
-        <div className="relative w-full aspect-[21/9] rounded-2xl overflow-hidden mb-10 border border-champagne/30 shadow-sm">
+        <div className="relative w-full aspect-[21/9] rounded-lg overflow-hidden mb-10 border border-champagne/30 shadow-sm">
           <Image
             src={article.image}
             alt={article.titre}
@@ -78,7 +78,7 @@ export default async function ArticleDetailPage({ params }: { params: Promise<{ 
               <Link
                 key={item.id}
                 href={`/ressources/${item.id}`}
-                className="group relative bg-white rounded-2xl border border-champagne/60 overflow-hidden shadow-sm hover:shadow-xl hover:border-gold/20 transition-all duration-500 flex flex-col"
+                className="group relative bg-white border border-champagne/60 overflow-hidden shadow-sm hover:shadow-xl hover:border-gold/20 transition-all duration-500 flex flex-col"
               >
                 <div className="relative w-full aspect-[16/9] overflow-hidden">
                   <Image
@@ -91,7 +91,7 @@ export default async function ArticleDetailPage({ params }: { params: Promise<{ 
                 </div>
                 <div className="p-5 flex flex-col flex-1">
                   <div className="flex items-center gap-2 mb-3">
-                    <span className="text-[10px] font-medium uppercase tracking-[0.1em] text-gold bg-gold/[0.06] px-2 py-0.5 rounded-full">
+                    <span className="text-[10px] font-medium uppercase tracking-[0.1em] text-gold bg-gold/[0.06] px-2 py-0.5">
                       {item.categorie}
                     </span>
                     <span className="text-[10px] text-anthracite/40">{item.temps_lecture} min</span>
@@ -115,7 +115,7 @@ export default async function ArticleDetailPage({ params }: { params: Promise<{ 
 
       {/* CTA discret – invitation à l’accompagnement */}
       <section className="max-w-4xl mx-auto px-6 lg:px-8 mt-20">
-        <div className="bg-cream rounded-2xl border border-champagne/60 p-8 sm:p-10 flex flex-col sm:flex-row items-center justify-between gap-6">
+        <div className="bg-cream border border-champagne/60 p-8 sm:p-10 flex flex-col sm:flex-row items-center justify-between gap-6">
           <div>
             <h3 className="text-xl sm:text-2xl font-serif font-bold text-indigo mb-2">
               Prêt à structurer votre croissance ?

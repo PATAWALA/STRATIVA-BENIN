@@ -27,7 +27,7 @@ export const articles: Article[] = [
     date: '2026-05-15',
     temps_lecture: 6,
     categorie: 'Stratégie',
-    image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    image: '/images/service1.jpg',
   },
   {
     id: '2',
@@ -43,7 +43,7 @@ export const articles: Article[] = [
     date: '2026-04-28',
     temps_lecture: 4,
     categorie: 'Gouvernance',
-    image: 'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    image: '/images/hero1.jpg',
   },
   {
     id: '3',
@@ -60,6 +60,6 @@ export const articles: Article[] = [
     date: '2026-03-12',
     temps_lecture: 5,
     categorie: 'Digital',
-    image: 'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    image: '/images/hero3.jpg',
   },
 ]
