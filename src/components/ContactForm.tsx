@@ -55,7 +55,7 @@ export default function ContactForm() {
   return (
     <div className="w-full max-w-2xl mx-auto">
       {/* Contact rapide WhatsApp */}
-      <div className="mb-10 bg-cream/50 rounded-2xl border border-champagne/60 p-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div className="mb-10 bg-cream/50 border border-champagne/60 p-6 flex flex-col sm:flex-row items-center justify-between gap-4">
         <div>
           <p className="text-sm font-medium text-indigo mb-1">Un besoin urgent ?</p>
           <p className="text-xs text-anthracite/60">Contactez-nous directement sur WhatsApp</p>
@@ -74,8 +74,8 @@ export default function ContactForm() {
       </div>
 
       {success ? (
-        <div className="rounded-2xl border border-champagne bg-white p-10 text-center shadow-sm">
-          <div className="mx-auto h-14 w-14 rounded-full bg-gold/10 flex items-center justify-center mb-4">
+        <div className="border border-champagne bg-white p-10 text-center shadow-sm">
+          <div className="mx-auto h-14 w-14 bg-gold/10 flex items-center justify-center mb-4">
             <svg className="h-7 w-7 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
             </svg>
@@ -84,7 +84,7 @@ export default function ContactForm() {
           <p className="mt-2 text-anthracite">Notre équipe vous répondra dans les meilleurs délais.</p>
         </div>
       ) : (
-        <form onSubmit={handleSubmit} className="space-y-6 rounded-2xl border border-champagne bg-white p-8 md:p-10 shadow-sm">
+        <form onSubmit={handleSubmit} className="space-y-6 border border-champagne bg-white p-8 md:p-10 shadow-sm">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label htmlFor="prenom" className="block text-sm font-medium text-indigo mb-1">Prénom *</label>
