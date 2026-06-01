@@ -4,7 +4,7 @@ export const dirigeant = {
   citation:
     '« Chaque entreprise recèle un potentiel inexploité. Notre mission est de le révéler avec rigueur, humilité et détermination. »',
   bio: '20 ans d’expérience en stratégie, ancien consultant chez McKinsey et Total.',
-  image: '/images/pdgs.jpg',
+  image: '/images/pdg1.jpg',
 }
 
 export const cabinetMessage = {
