@@ -4,8 +4,6 @@ import { useEffect, useState, useCallback } from 'react'
 import { createBrowserClient } from '@/lib/supabase/client'
 import type { LeadInsert } from '@/types'
 
-const POPUP_KEY = 'strativa_popup_closed'
-
 export default function SmartPopup() {
   const [visible, setVisible] = useState(false)
   const [email, setEmail] = useState('')
@@ -13,22 +11,14 @@ export default function SmartPopup() {
   const [success, setSuccess] = useState(false)
   const [error, setError] = useState('')
 
-  // Vérifie si l'utilisateur a déjà interagi
-  const hasInteracted = () => {
-    if (typeof window === 'undefined') return true
-    return localStorage.getItem(POPUP_KEY) === 'true'
-  }
-
-  // Déclencheurs : 15 secondes ou exit-intent
+  // Déclencheurs : 15 secondes ou exit-intent (à chaque visite)
   useEffect(() => {
-    if (hasInteracted()) return
-
     const timer = setTimeout(() => {
       setVisible(true)
     }, 15000)
 
     const handleExit = (e: MouseEvent) => {
-      if (e.clientY <= 0 && !hasInteracted()) {
+      if (e.clientY <= 0) {
         setVisible(true)
       }
     }
@@ -42,7 +32,6 @@ export default function SmartPopup() {
 
   const closePopup = useCallback(() => {
     setVisible(false)
-    localStorage.setItem(POPUP_KEY, 'true')
   }, [])
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -64,7 +53,6 @@ export default function SmartPopup() {
       const { error: insertError } = await supabase.from('leads').insert([lead])
       if (insertError) throw insertError
       setSuccess(true)
-      localStorage.setItem(POPUP_KEY, 'true')
       setTimeout(() => setVisible(false), 3000)
     } catch (err: any) {
       setError('Une erreur est survenue. Veuillez réessayer.')
@@ -78,7 +66,7 @@ export default function SmartPopup() {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-indigo/40 backdrop-blur-sm animate-fade-in">
-      <div className="relative w-full max-w-md rounded-2xl bg-white p-8 shadow-2xl border border-champagne">
+      <div className="relative w-full max-w-md bg-white p-8 shadow-2xl border border-champagne">
         <button
           onClick={closePopup}
           className="absolute top-4 right-4 text-anthracite/50 hover:text-indigo transition-colors"
@@ -90,7 +78,7 @@ export default function SmartPopup() {
         {!success ? (
           <>
             <div className="flex justify-center mb-6">
-              <div className="h-14 w-14 rounded-full bg-gold/10 flex items-center justify-center">
+              <div className="h-14 w-14 bg-gold/10 flex items-center justify-center">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
                 </svg>
@@ -109,7 +97,7 @@ export default function SmartPopup() {
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="votre@email.com"
                 required
-                className="w-full rounded-lg border border-champagne bg-cream px-4 py-3 text-sm text-indigo placeholder:text-anthracite/50 focus:border-gold focus:ring-1 focus:ring-gold transition-all duration-300"
+                className="w-full border border-champagne bg-cream px-4 py-3 text-sm text-indigo placeholder:text-anthracite/50 focus:border-gold focus:ring-1 focus:ring-gold outline-none transition-all"
               />
               {error && <p className="text-xs text-red-500">{error}</p>}
               <button
@@ -131,7 +119,7 @@ export default function SmartPopup() {
           </>
         ) : (
           <div className="text-center py-4">
-            <div className="mx-auto h-14 w-14 rounded-full bg-green-50 flex items-center justify-center mb-4">
+            <div className="mx-auto h-14 w-14 bg-green-50 flex items-center justify-center mb-4">
               <svg className="h-7 w-7 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
               </svg>

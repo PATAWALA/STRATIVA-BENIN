@@ -1,4 +1,5 @@
 import { temoignages } from '@/data/temoignages'
+import Link from 'next/link'
 
 export default function SectionTemoignages() {
   return (
@@ -33,6 +34,22 @@ export default function SectionTemoignages() {
               </div>
             </div>
           ))}
+        </div>
+
+        {/* CTA après les témoignages */}
+        <div className="mt-16 text-center">
+          <p className="text-lg text-anthracite/60 mb-6 font-light">
+            Comme eux, donnez un nouvel élan à votre entreprise.
+          </p>
+          <Link
+            href="/contact"
+            className="inline-flex items-center gap-2 bg-indigo px-8 py-4 text-sm font-medium text-white hover:bg-indigo/90 transition-colors"
+          >
+            Se faire accompagner
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+            </svg>
+          </Link>
         </div>
       </div>
     </section>
