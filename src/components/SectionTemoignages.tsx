@@ -20,7 +20,7 @@ export default function SectionTemoignages() {
           {temoignages.map((t, i) => (
             <div
               key={i}
-              className="rounded-2xl border border-champagne/60 p-8 shadow-lg bg-gradient-to-b from-white via-white to-indigo"
+              className="border border-champagne/60 p-8 shadow-lg bg-gradient-to-b from-white via-white to-indigo"
             >
               <p className="text-anthracite italic mb-6 leading-relaxed">
                 « {t.texte} »

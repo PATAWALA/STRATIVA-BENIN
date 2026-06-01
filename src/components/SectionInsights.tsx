@@ -5,10 +5,10 @@ export default function SectionInsights() {
   return (
     <section className="py-24 bg-cream">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        
+
         {/* En-tête */}
         <div className="mb-16 text-center">
-          {/* Ligne décorative tricolore du Bénin */}
+          {/* Ligne décorative tricolore du Bénin (reste en petits traits arrondis ou pas, au choix) */}
           <div className="flex items-center justify-center gap-1 mb-6">
             <span className="h-1 w-8 bg-benin-green rounded-full" />
             <span className="h-1 w-8 bg-benin-yellow rounded-full" />
@@ -31,11 +31,11 @@ export default function SectionInsights() {
             <Link
               key={item.id}
               href={item.lien}
-              className="group relative bg-white rounded-2xl border border-champagne/60 p-8 shadow-sm hover:shadow-xl hover:border-gold/20 transition-all duration-500 flex flex-col"
+              className="group relative bg-white border border-champagne/60 p-8 shadow-sm hover:shadow-xl hover:border-gold/20 transition-all duration-500 flex flex-col"
             >
               {/* Catégorie + temps de lecture */}
               <div className="flex items-center gap-3 mb-6">
-                <span className="text-[11px] font-medium uppercase tracking-[0.15em] text-gold bg-gold/[0.06] px-3 py-1.5 rounded-full">
+                <span className="text-[11px] font-medium uppercase tracking-[0.15em] text-gold bg-gold/[0.06] px-3 py-1.5">
                   {item.categorie}
                 </span>
                 <span className="text-[11px] text-anthracite/40">
@@ -48,8 +48,8 @@ export default function SectionInsights() {
                 {item.titre}
               </h3>
 
-              {/* Barre tricolore Bénin sous le titre */}
-              <div className="w-16 h-[3px] bg-gradient-to-r from-benin-green via-benin-yellow to-benin-red mb-4 rounded-full opacity-70 group-hover:opacity-100 transition-opacity" />
+              {/* Barre tricolore Bénin sous le titre (reste en petit trait) */}
+              <div className="w-16 h-[3px] bg-gradient-to-r from-benin-green via-benin-yellow to-benin-red mb-4 opacity-70 group-hover:opacity-100 transition-opacity" />
 
               {/* Résumé */}
               <p className="text-sm text-anthracite/60 leading-relaxed mb-6 flex-1">

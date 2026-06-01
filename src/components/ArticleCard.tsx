@@ -6,7 +6,7 @@ export default function ArticleCard({ article }: { article: Article }) {
   return (
     <Link
       href={`/ressources/${article.id}`}
-      className="group relative bg-white rounded-2xl border border-champagne/60 overflow-hidden shadow-sm hover:shadow-xl hover:border-gold/20 transition-all duration-500 flex flex-col"
+      className="group relative bg-white border border-champagne/60 overflow-hidden shadow-sm hover:shadow-xl hover:border-gold/20 transition-all duration-500 flex flex-col"
     >
       {/* Image miniature */}
       <div className="relative w-full aspect-[16/9] overflow-hidden">
@@ -24,7 +24,7 @@ export default function ArticleCard({ article }: { article: Article }) {
       {/* Contenu texte */}
       <div className="p-6 flex flex-col flex-1">
         <div className="flex items-center gap-3 mb-4">
-          <span className="text-[10px] font-medium uppercase tracking-[0.15em] text-gold bg-gold/[0.06] px-3 py-1 rounded-full">
+          <span className="text-[10px] font-medium uppercase tracking-[0.15em] text-gold bg-gold/[0.06] px-3 py-1">
             {article.categorie}
           </span>
           <span className="text-[10px] text-anthracite/40">
@@ -37,7 +37,7 @@ export default function ArticleCard({ article }: { article: Article }) {
         </h3>
 
         {/* Barre tricolore Bénin discrète */}
-        <div className="w-12 h-[3px] bg-gradient-to-r from-benin-green via-benin-yellow to-benin-red mb-3 rounded-full opacity-60 group-hover:opacity-100 transition-opacity" />
+        <div className="w-12 h-[3px] bg-gradient-to-r from-benin-green via-benin-yellow to-benin-red mb-3 opacity-60 group-hover:opacity-100 transition-opacity" />
 
         <p className="text-sm text-anthracite/60 leading-relaxed mb-4 flex-1 line-clamp-3">
           {article.resume}

@@ -7,14 +7,17 @@ import Image from 'next/image'
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false)
 
-  // Empêche le scroll quand la sidebar est ouverte
   useEffect(() => {
-    document.body.style.overflow = mobileOpen ? 'hidden' : ''
+    if (mobileOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
+    }
     return () => { document.body.style.overflow = '' }
   }, [mobileOpen])
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-white/85 backdrop-blur-lg border-b border-champagne/20 h-20">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-white/90 border-b border-champagne/20 h-20">
       <div className="max-w-7xl mx-auto px-6 lg:px-8 h-full flex items-center justify-between">
         
         {/* Logo + Nom */}
@@ -34,7 +37,7 @@ export default function Header() {
           </span>
         </Link>
 
-        {/* Navigation desktop – sans soulignement */}
+        {/* Desktop Navigation – sans soulignement */}
         <nav className="hidden md:flex items-center gap-8">
           <Link href="/" className="text-sm font-medium text-anthracite/70 hover:text-indigo transition-colors">
             Accueil
@@ -65,70 +68,64 @@ export default function Header() {
 
         {/* Bouton hamburger mobile */}
         <button
-          onClick={() => setMobileOpen(!mobileOpen)}
-          className="md:hidden relative w-8 h-8 flex items-center justify-center text-indigo z-50"
+          onClick={() => setMobileOpen(true)}
+          className="md:hidden relative w-8 h-8 flex items-center justify-center text-indigo"
           aria-label="Menu"
         >
           <div className="flex flex-col gap-1.5">
-            <span className={`block h-0.5 w-6 bg-current transition-transform duration-300 ${mobileOpen ? 'rotate-45 translate-y-2' : ''}`} />
-            <span className={`block h-0.5 w-6 bg-current transition-opacity duration-300 ${mobileOpen ? 'opacity-0' : ''}`} />
-            <span className={`block h-0.5 w-6 bg-current transition-transform duration-300 ${mobileOpen ? '-rotate-45 -translate-y-2' : ''}`} />
+            <span className="block h-0.5 w-6 bg-current" />
+            <span className="block h-0.5 w-6 bg-current" />
+            <span className="block h-0.5 w-6 bg-current" />
           </div>
         </button>
       </div>
 
-      {/* Overlay sombre */}
+      {/* Menu mobile fullscreen opaque (fond blanc pur) */}
       {mobileOpen && (
-        <div
-          className="md:hidden fixed inset-0 z-40 bg-black/60 backdrop-blur-sm"
-          onClick={() => setMobileOpen(false)}
-        />
+        <div className="md:hidden fixed inset-0 z-50 bg-white flex flex-col">
+          {/* Bouton fermeture */}
+          <div className="flex justify-end p-6">
+            <button
+              onClick={() => setMobileOpen(false)}
+              className="w-12 h-12 flex items-center justify-center rounded-full bg-cream text-indigo hover:bg-champagne transition-colors"
+              aria-label="Fermer le menu"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+
+          {/* Liens centrés */}
+          <nav className="flex-1 flex flex-col items-center justify-center gap-8">
+            <Link href="/" onClick={() => setMobileOpen(false)} className="text-3xl font-serif font-bold text-indigo hover:text-gold transition-colors">
+              Accueil
+            </Link>
+            <Link href="/services" onClick={() => setMobileOpen(false)} className="text-3xl font-serif font-bold text-indigo hover:text-gold transition-colors">
+              Services
+            </Link>
+            <Link href="/ressources" onClick={() => setMobileOpen(false)} className="text-3xl font-serif font-bold text-indigo hover:text-gold transition-colors">
+              Ressources
+            </Link>
+            <Link href="/a-propos" onClick={() => setMobileOpen(false)} className="text-3xl font-serif font-bold text-indigo hover:text-gold transition-colors">
+              À propos
+            </Link>
+          </nav>
+
+          {/* Bouton CTA en bas */}
+          <div className="p-6">
+            <Link
+              href="/contact"
+              onClick={() => setMobileOpen(false)}
+              className="flex items-center justify-center gap-2 w-full bg-indigo py-4 text-sm font-medium text-white hover:bg-indigo/90 transition-colors"
+            >
+              <span className="w-1.5 h-1.5 bg-gold rotate-45" />
+              Se faire accompagner
+            </Link>
+          </div>
+        </div>
       )}
 
-      {/* Sidebar mobile droite – fond opaque */}
-      <div className={`md:hidden fixed top-0 right-0 bottom-0 z-40 w-72 bg-white shadow-2xl transition-transform duration-500 ease-in-out flex flex-col ${mobileOpen ? 'translate-x-0' : 'translate-x-full'}`}>
-        
-        {/* Bouton fermeture */}
-        <button
-          onClick={() => setMobileOpen(false)}
-          className="absolute top-4 right-4 w-10 h-10 flex items-center justify-center rounded-full bg-cream text-indigo hover:bg-champagne transition-colors"
-          aria-label="Fermer le menu"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-          </svg>
-        </button>
-
-        {/* Liens de navigation */}
-        <nav className="flex-1 flex flex-col justify-center px-6 space-y-8">
-          <Link href="/" onClick={() => setMobileOpen(false)} className="block text-xl font-serif font-bold text-indigo hover:text-gold transition-colors">
-            Accueil
-          </Link>
-          <Link href="/services" onClick={() => setMobileOpen(false)} className="block text-xl font-serif font-bold text-indigo hover:text-gold transition-colors">
-            Services
-          </Link>
-          <Link href="/ressources" onClick={() => setMobileOpen(false)} className="block text-xl font-serif font-bold text-indigo hover:text-gold transition-colors">
-            Ressources
-          </Link>
-          <Link href="/a-propos" onClick={() => setMobileOpen(false)} className="block text-xl font-serif font-bold text-indigo hover:text-gold transition-colors">
-            À propos
-          </Link>
-        </nav>
-
-        {/* Bouton "Se faire accompagner" en bas */}
-        <div className="p-6">
-          <Link
-            href="/contact"
-            onClick={() => setMobileOpen(false)}
-            className="flex items-center justify-center gap-2 w-full bg-indigo py-4 text-sm font-medium text-white hover:bg-indigo/90 transition-colors"
-          >
-            <span className="w-1.5 h-1.5 bg-gold rotate-45" />
-            Se faire accompagner
-          </Link>
-        </div>
-      </div>
-
-      {/* Animation de pulsation */}
       <style jsx>{`
         @keyframes pulse-slow {
           0%, 100% { transform: scale(1); }
