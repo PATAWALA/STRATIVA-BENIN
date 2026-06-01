@@ -53,7 +53,7 @@ export default function SmartPopup() {
       const { error: insertError } = await supabase.from('leads').insert([lead])
       if (insertError) throw insertError
       setSuccess(true)
-      setTimeout(() => setVisible(false), 3000)
+      // On ne ferme plus automatiquement pour laisser le temps de télécharger
     } catch (err: any) {
       setError('Une erreur est survenue. Veuillez réessayer.')
       console.error(err)
@@ -125,7 +125,24 @@ export default function SmartPopup() {
               </svg>
             </div>
             <h3 className="text-lg font-serif font-bold text-indigo">Merci !</h3>
-            <p className="text-sm text-anthracite mt-2">Le guide vous sera envoyé dans quelques instants.</p>
+            <p className="text-sm text-anthracite mt-2">
+              Le guide a été envoyé à <strong>{email}</strong>.
+            </p>
+            <p className="text-xs text-anthracite/60 mt-1">
+              Consultez votre boîte mail ou téléchargez-le directement.
+            </p>
+            <a
+              href="/guide.pdf"
+              download
+              className="inline-flex items-center gap-2 bg-gold text-white px-5 py-2 text-sm font-medium mt-4 hover:bg-gold/90 transition-colors"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+              </svg>
+              Télécharger le guide
+            </a>
           </div>
         )}
       </div>
