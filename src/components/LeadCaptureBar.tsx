@@ -5,11 +5,14 @@ import { useState } from 'react'
 export default function LeadCaptureBar() {
   const [email, setEmail] = useState('')
   const [success, setSuccess] = useState(false)
-  const [dismissed, setDismissed] = useState(false)
+  const [dismissed, setDismissed] = useState(
+    typeof window !== 'undefined' && localStorage.getItem('strativa_lead_converted') === 'true'
+  )
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return
+    localStorage.setItem('strativa_lead_converted', 'true')
     setSuccess(true)
   }
 

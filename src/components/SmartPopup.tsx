@@ -7,8 +7,10 @@ export default function SmartPopup() {
   const [email, setEmail] = useState('')
   const [success, setSuccess] = useState(false)
 
-  // Déclencheurs : 15 secondes ou exit-intent
+  // Déclencheurs : 15 secondes ou exit-intent (seulement si pas déjà converti)
   useEffect(() => {
+    if (localStorage.getItem('strativa_lead_converted') === 'true') return
+
     const timer = setTimeout(() => setVisible(true), 15000)
     const handleExit = (e: MouseEvent) => {
       if (e.clientY <= 0) setVisible(true)
@@ -23,7 +25,8 @@ export default function SmartPopup() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return
-    // Succès immédiat, sans appel externe
+    // Marque la conversion pour ne plus afficher les popups/bandeaux
+    localStorage.setItem('strativa_lead_converted', 'true')
     setSuccess(true)
   }
 
