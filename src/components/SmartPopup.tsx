@@ -1,30 +1,44 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 
 export default function SmartPopup() {
   const [visible, setVisible] = useState(false)
   const [email, setEmail] = useState('')
   const [success, setSuccess] = useState(false)
+  const [error, setError] = useState('')
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   useEffect(() => {
-    // Ne s'ouvre pas si déjà converti
+    // Ne rien faire si déjà converti
     if (typeof window !== 'undefined' && localStorage.getItem('strativa_lead_converted') === 'true') return
 
-    const timer = setTimeout(() => setVisible(true), 15000)
+    timerRef.current = setTimeout(() => {
+      // Vérifie à nouveau au moment du déclenchement
+      if (localStorage.getItem('strativa_lead_converted') !== 'true') {
+        setVisible(true)
+      }
+    }, 15000)
+
     const handleExit = (e: MouseEvent) => {
-      if (e.clientY <= 0) setVisible(true)
+      if (e.clientY <= 0 && localStorage.getItem('strativa_lead_converted') !== 'true') {
+        setVisible(true)
+      }
     }
     document.addEventListener('mouseleave', handleExit)
+
     return () => {
-      clearTimeout(timer)
+      if (timerRef.current) clearTimeout(timerRef.current)
       document.removeEventListener('mouseleave', handleExit)
     }
   }, [])
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return
+  const handleReceive = () => {
+    setError('')
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      setError('Veuillez entrer une adresse email valide.')
+      return
+    }
     localStorage.setItem('strativa_lead_converted', 'true')
     setSuccess(true)
   }
@@ -60,22 +74,22 @@ export default function SmartPopup() {
             <p className="text-anthracite text-sm text-center mb-6">
               Téléchargez le Guide : <strong>Les 3 freins invisibles qui bloquent la rentabilité de votre PME au Bénin</strong>.
             </p>
-            <form onSubmit={handleSubmit} className="space-y-3">
+            <div className="space-y-3">
               <input
                 type="email"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e) => { setEmail(e.target.value); setError(''); }}
                 placeholder="votre@email.com"
-                required
                 className="w-full border border-champagne bg-cream px-4 py-3 text-sm text-indigo placeholder:text-anthracite/50 focus:border-gold focus:ring-1 focus:ring-gold outline-none"
               />
+              {error && <p className="text-xs text-red-500">{error}</p>}
               <button
-                type="submit"
+                onClick={handleReceive}
                 className="w-full bg-indigo py-3 text-sm font-semibold text-white hover:bg-indigo/90 transition-colors"
               >
                 Recevoir le guide gratuit
               </button>
-            </form>
+            </div>
             <p className="mt-4 text-xs text-anthracite/50 text-center">Vos données restent confidentielles. Aucun spam.</p>
           </>
         ) : (
