@@ -1,24 +1,14 @@
-'use client'
-
 import { insights } from '@/data/insights'
 import Link from 'next/link'
-import { motion } from 'framer-motion'
-
-const MotionLink = motion(Link)
 
 export default function SectionInsights() {
   return (
     <section className="py-24 bg-cream">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        {/* En-tête animé */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, ease: 'easeOut' }}
-          className="mb-16 text-center"
-        >
-          {/* Ligne décorative tricolore du Bénin */}
+
+        {/* En-tête */}
+        <div className="mb-16 text-center">
+          {/* Ligne décorative tricolore du Bénin (reste en petits traits arrondis ou pas, au choix) */}
           <div className="flex items-center justify-center gap-1 mb-6">
             <span className="h-1 w-8 bg-benin-green rounded-full" />
             <span className="h-1 w-8 bg-benin-yellow rounded-full" />
@@ -33,18 +23,14 @@ export default function SectionInsights() {
           <p className="mt-4 text-base text-anthracite/50 max-w-2xl mx-auto leading-relaxed">
             Des contenus stratégiques pour vous aider à prendre les bonnes décisions.
           </p>
-        </motion.div>
+        </div>
 
-        {/* Cartes animées */}
+        {/* Cartes */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {insights.map((item, index) => (
-            <MotionLink
+          {insights.map((item) => (
+            <Link
               key={item.id}
               href={item.lien}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.15, ease: 'easeOut' }}
               className="group relative bg-white border border-champagne/60 p-8 shadow-sm hover:shadow-xl hover:border-gold/20 transition-all duration-500 flex flex-col"
             >
               {/* Catégorie + temps de lecture */}
@@ -62,7 +48,7 @@ export default function SectionInsights() {
                 {item.titre}
               </h3>
 
-              {/* Barre tricolore Bénin sous le titre */}
+              {/* Barre tricolore Bénin sous le titre (reste en petit trait) */}
               <div className="w-16 h-[3px] bg-gradient-to-r from-benin-green via-benin-yellow to-benin-red mb-4 opacity-70 group-hover:opacity-100 transition-opacity" />
 
               {/* Résumé */}
@@ -92,7 +78,7 @@ export default function SectionInsights() {
                   </svg>
                 </span>
               </div>
-            </MotionLink>
+            </Link>
           ))}
         </div>
       </div>
