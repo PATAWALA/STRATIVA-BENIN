@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Inter, Playfair_Display } from 'next/font/google'
 import './globals.css'
+import LeadCaptureBar from '@/components/LeadCaptureBar'
 import SmartPopup from '@/components/SmartPopup'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
@@ -33,6 +34,7 @@ export default function RootLayout({
         <Header />
         {children}
         <Footer />
+        <LeadCaptureBar />
         <SmartPopup />
       </body>
     </html>
