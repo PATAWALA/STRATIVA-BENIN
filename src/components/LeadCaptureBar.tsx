@@ -24,21 +24,19 @@ export default function LeadCaptureBar() {
         {success ? (
           <div className="flex-1 text-center sm:text-left flex flex-col sm:flex-row items-center gap-4">
             <div className="flex-1">
-              <p className="text-white text-sm font-medium">✅ Guide envoyé à <strong>{email}</strong>.</p>
-              <p className="text-white/70 text-xs mt-1">Consultez votre boîte mail ou téléchargez-le directement.</p>
+              <p className="text-white text-sm font-medium">
+                ✅ Guide envoyé à <strong>{email}</strong>.
+              </p>
+              <p className="text-white/70 text-xs mt-1">
+                Vérifiez votre boîte mail (et vos spams).
+              </p>
             </div>
-            <a
-              href="/guide.pdf"
-              download
-              className="inline-flex items-center gap-2 bg-white text-indigo px-4 py-2 text-sm font-medium hover:bg-gold hover:text-white transition-colors"
-              target="_blank"
-              rel="noopener noreferrer"
+            <button
+              onClick={() => setDismissed(true)}
+              className="bg-white text-indigo px-4 py-2 text-sm font-medium hover:bg-gold hover:text-white transition-colors"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-              </svg>
-              Télécharger le guide
-            </a>
+              Fermer
+            </button>
           </div>
         ) : (
           <>
@@ -65,14 +63,17 @@ export default function LeadCaptureBar() {
             </form>
           </>
         )}
-        <button
-          onClick={() => setDismissed(true)}
-          className="absolute top-0 right-0 text-white/50 hover:text-white transition-colors"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-          </svg>
-        </button>
+        {/* Bouton de fermeture discret si pas encore converti */}
+        {!success && (
+          <button
+            onClick={() => setDismissed(true)}
+            className="absolute top-0 right-0 text-white/50 hover:text-white transition-colors"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        )}
       </div>
     </div>
   )

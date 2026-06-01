@@ -7,9 +7,9 @@ export default function SmartPopup() {
   const [email, setEmail] = useState('')
   const [success, setSuccess] = useState(false)
 
-  // Déclencheurs : 15 secondes ou exit-intent (seulement si pas déjà converti)
   useEffect(() => {
-    if (localStorage.getItem('strativa_lead_converted') === 'true') return
+    // Ne s'ouvre pas si déjà converti
+    if (typeof window !== 'undefined' && localStorage.getItem('strativa_lead_converted') === 'true') return
 
     const timer = setTimeout(() => setVisible(true), 15000)
     const handleExit = (e: MouseEvent) => {
@@ -25,9 +25,12 @@ export default function SmartPopup() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return
-    // Marque la conversion pour ne plus afficher les popups/bandeaux
     localStorage.setItem('strativa_lead_converted', 'true')
     setSuccess(true)
+  }
+
+  const handleClose = () => {
+    setVisible(false)
   }
 
   if (!visible) return null
@@ -36,7 +39,7 @@ export default function SmartPopup() {
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-indigo/40 backdrop-blur-sm">
       <div className="relative w-full max-w-md bg-white p-8 shadow-2xl border border-champagne">
         <button
-          onClick={() => setVisible(false)}
+          onClick={handleClose}
           className="absolute top-4 right-4 text-anthracite/50 hover:text-indigo transition-colors"
         >
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -83,19 +86,18 @@ export default function SmartPopup() {
               </svg>
             </div>
             <h3 className="text-lg font-serif font-bold text-indigo">Merci !</h3>
-            <p className="text-sm text-anthracite mt-2">Votre guide est prêt.</p>
-            <a
-              href="/guide.pdf"
-              download
-              className="inline-flex items-center gap-2 bg-gold text-white px-5 py-2 text-sm font-medium mt-4 hover:bg-gold/90 transition-colors"
-              target="_blank"
-              rel="noopener noreferrer"
+            <p className="text-sm text-anthracite mt-2">
+              Votre guide a été envoyé à <strong>{email}</strong>.
+            </p>
+            <p className="text-xs text-anthracite/60 mt-1">
+              Vérifiez votre boîte mail (et vos spams).
+            </p>
+            <button
+              onClick={handleClose}
+              className="mt-6 bg-indigo text-white px-6 py-2 text-sm font-medium hover:bg-indigo/90 transition-colors"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-              </svg>
-              Télécharger le guide
-            </a>
+              Quitter
+            </button>
           </div>
         )}
       </div>
